@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 6% 6%;
+    --foreground: 0 0% 95%;
+
+    --card: 240 5% 10%;
+    --card-foreground: 0 0% 95%;
+    --card-hover: 240 5% 12%;
+
+    --popover: 240 5% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 174 72% 56%;
+    --primary-foreground: 240 6% 6%;
+    --primary-glow: 174 72% 40%;
+
+    --secondary: 240 5% 16%;
+    --secondary-foreground: 0 0% 85%;
+
+    --muted: 240 5% 18%;
+    --muted-foreground: 240 5% 55%;
+
+    --accent: 280 65% 60%;
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 240 5% 18%;
+    --input: 240 5% 14%;
+    --ring: 174 72% 56%;
+
+    --radius: 0.75rem;
+
+    /* Tool-specific colors */
+    --chatgpt: 142 70% 45%;
+    --midjourney: 280 65% 55%;
+    --dalle: 35 95% 55%;
+    --stable-diffusion: 200 75% 55%;
+
+    /* Badge colors */
+    --badge-image: 174 72% 56%;
+    --badge-text: 142 70% 45%;
+    --badge-video: 280 65% 55%;
+    --badge-code: 35 95% 55%;
+
+    /* Shadows and effects */
+    --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.4);
+    --shadow-card-hover: 0 8px 32px -4px hsl(0 0% 0% / 0.6);
+    --shadow-glow: 0 0 40px hsl(174 72% 56% / 0.15);
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(174 72% 56%), hsl(174 72% 40%));
+    --gradient-card: linear-gradient(180deg, hsl(240 5% 12%), hsl(240 5% 8%));
+    --gradient-hero: linear-gradient(180deg, hsl(240 6% 8%) 0%, hsl(240 6% 4%) 100%);
+
+    --sidebar-background: 240 5% 8%;
+    --sidebar-foreground: 0 0% 85%;
+    --sidebar-primary: 174 72% 56%;
+    --sidebar-primary-foreground: 240 6% 6%;
+    --sidebar-accent: 240 5% 14%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 240 5% 18%;
+    --sidebar-ring: 174 72% 56%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
+  }
+}
+
+@layer components {
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .card-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(0 0% 100% / 0.03),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .card-shine:hover::before {
+    left: 100%;
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50;
+  }
+
+  /* Glow effect */
+  .glow-primary {
+    box-shadow: 0 0 30px hsl(174 72% 56% / 0.2);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(174 72% 56%), hsl(174 72% 70%));
+  }
+
+  /* Tool badge variants */
+  .tool-badge-chatgpt {
+    @apply bg-[hsl(142,70%,45%)]/15 text-[hsl(142,70%,55%)] border border-[hsl(142,70%,45%)]/30;
+  }
+
+  .tool-badge-midjourney {
+    @apply bg-[hsl(280,65%,55%)]/15 text-[hsl(280,65%,65%)] border border-[hsl(280,65%,55%)]/30;
+  }
+
+  .tool-badge-dalle {
+    @apply bg-[hsl(35,95%,55%)]/15 text-[hsl(35,95%,65%)] border border-[hsl(35,95%,55%)]/30;
+  }
+
+  .tool-badge-stable-diffusion {
+    @apply bg-[hsl(200,75%,55%)]/15 text-[hsl(200,75%,65%)] border border-[hsl(200,75%,55%)]/30;
+  }
+
+  /* Type badges */
+  .type-badge-image {
+    @apply bg-primary/15 text-primary border border-primary/30;
+  }
+
+  .type-badge-text {
+    @apply bg-[hsl(142,70%,45%)]/15 text-[hsl(142,70%,55%)] border border-[hsl(142,70%,45%)]/30;
+  }
+
+  .type-badge-video {
+    @apply bg-accent/15 text-accent border border-accent/30;
+  }
+
+  .type-badge-code {
+    @apply bg-[hsl(35,95%,55%)]/15 text-[hsl(35,95%,65%)] border border-[hsl(35,95%,55%)]/30;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
